@@ -1,0 +1,11 @@
+<h1>show User</h1>
+<p style="color: green"><%= notice %></p>
+
+<%=render @user%>
+
+<div>
+        <br>
+        <%=link_to 'Edit this User',edit_user_path(@user)%> |
+        <%=link_to 'Back to users',users_path %>
+        </br></br><%=button_to 'delete user',@user,method: :delete%>
+</div>

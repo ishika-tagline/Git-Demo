@@ -1,0 +1,32 @@
+<h1>Hello Rails</h1>
+<p>Find me in app/views/articles/index.html.erb</p>
+
+<div>
+    <h1><%= @article.title %></h1>
+    <h2><%= @article.body %></h2>
+    <%= @article.comments.each do |comment| %>
+    <h3><%=comment.commenter%></h3>
+    <h4><%=comment.body%></h4>
+    <% end %>
+</div>
+
+<div>
+
+    <h2></h2>
+    <%= form_with model: [@article,@article.comments.build] do |form| %>
+    
+        <p>
+            <%= form.label :commenter %>
+            <%= form.text_field :commenter %>
+        </p>
+
+        <p>
+            <%= form.label :body %>
+            <%= form.text_field :body %>
+        </p>
+
+        <p>
+            <%= form.submit%>
+        </p>
+    <%end%>
+</div>

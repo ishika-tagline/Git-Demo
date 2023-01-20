@@ -1,0 +1,19 @@
+<%= form_with(model: user) do |form| %>
+
+<%= yield form %>
+
+<div>
+    <%=form.label :name %><br>
+    <%=form.text_field :name %>
+</div>
+
+<div>
+    <%=form.label :age %><br>
+    <%=form.text_field :age %>
+</div>
+
+<div>
+    <br><%= form.submit%>
+</div>
+
+<%end%>

@@ -1,0 +1,116 @@
+<h1>Users#get form</h1>
+
+<%=form_with(url: users_get_form_path,method: :post) do |form|%>
+<%= form.label :query ,"Search for"%>
+<%= form.text_field :query%>
+
+<br><br>
+<%=form.check_box :male%>
+<%=form.label :male , "Male"%>
+<%=form.check_box :female%>
+<%=form.label :female ,"Female"%>
+
+<br><br>
+<%=form.radio_button :age, "child"%>
+<%=form.label :age_child ,"child"%>
+<%=form.radio_button :age, "adult"%>
+<%=form.label :age_adult,"adult" %>
+
+<br><br>
+
+<%=form.label :message, "address"%><br>
+<%=form.text_area :message,size: '70x5'%>
+
+<br><br>
+<%=form.label :password, "Enter password"%>
+<%=form.password_field :password%>
+
+<br><br>
+<%=form.label :price, "price"%>
+<%=form.number_field :price,in:1.0..20.0,step:0.5%>
+
+<br><br>
+<%=form.label :discount, "discount"%>
+<%=form.range_field :discount,in:1..100%>
+
+<br><br>
+<%-form.label :birthdate ,"Birth Date"%>
+<%=form.date_field :birthdate%>
+
+<br><br>
+<%=form.label :start_at, "Start at"%>
+<%=form.time_field :start_at%>
+
+<br><br>
+<%=form.label :celebration_day,"Celebration Day"%>
+<%=form.datetime_local_field :celebration_day%>
+
+<br><br>
+<%=form.label :month_field, "Enter Month"%>
+<%=form.month_field :month_field%>
+
+<br><br>
+<%=form.label :week_fiels ,"Add week"%>
+<%=form.week_field   :week_fiels%>
+
+<br><br>
+<%=form.label :search, "Search"%>
+<%=form.search_field :search%>
+
+<br><br>
+<%=form.label :email, "Email"%>
+<%=form.email_field :email%>
+
+<br><br>
+<%=form.label :telephone, "Telephone Number"%>
+<%=form.telephone_field :telephone%>
+
+<br><br>
+<%=form.label :url, "URL"%>
+<%=form.url_field :url%>
+
+<br><br>
+<%=form.label :country,"Select Country"%>
+<%=form.select :country,[ ['India',1],['China',2],['Rusia',3],['Canada',4],['US',5],['select country',"",{hidden: true}]]%>
+
+<%= form.select :city,
+      {
+        "Europe" => [ ["Berlin", "BE"], ["Madrid", "MD"] ],
+        "North America" => [ ["Chicago", "CHI"] ],
+      },
+      selected: "CHI" %>
+
+<%= select_year 1999, prefix: "party" %>
+
+<%=form.collection_select :user,User.order(:name),:id,:name%>
+
+<%= form.submit "Search"%>
+
+<%end%>
+
+
+<br><br><h2>New Form</h2>
+
+<%=form_with model:@user do |form|%>
+<%=form.text_field :name%><br></br>
+<%=form.text_area :age%><br><br>
+<%=form.select :name,[[1,'ishika'],[2,'janu'],[3,'janu106765765']]%><br><br>
+
+
+<%= "1st method" %><br>
+  <%@user.acc.each do |account|%>
+    <%=form.fields_for account,index:account.id do |acc_form|%>
+      <%=acc_form.text_field:name%><br><br>
+      <%=acc_form.check_box:_destroy%><br><br>
+    <%end%>
+
+  <%end%>
+
+<%= "2nd method" %><br>
+  <%=form.fields_for :acc do |account|%>
+    <%=account.text_field:name%><br><br>
+  <%end%>
+
+<br><br><%=form.submit%>
+<%end%>
+

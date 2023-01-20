@@ -1,0 +1,15 @@
+<h1>Edit Account</h1>
+
+<%=@account.name%>
+
+<%= form_with(model: @account,url:user_account_path(@user,@account)) do |form| %>
+<div>
+<%=form.label :name%></br>
+<%=form.text_field :name%>
+</div>
+<div>
+    <br><%= form.submit%>
+</div>
+<%end%>
+
+
