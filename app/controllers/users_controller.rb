@@ -86,8 +86,9 @@ class UsersController < ApplicationController
   end
 
   def update_form
+    render plain: "hii"
   end
-  
+
   def show_form
   end
   
