@@ -85,6 +85,9 @@ class UsersController < ApplicationController
     #render template: 'users/show_form'
   end
 
+  def update_form
+  end
+  
   def show_form
   end
   
