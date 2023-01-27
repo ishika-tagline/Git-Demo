@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'delete/user/:user_id/account/:id', to: 'accounts#destroy', as: :account_delete
   end
 
+  devise_for :users
+
   resources :users do
     scope module: 'admin' do     #/accounts
       resources :accounts
