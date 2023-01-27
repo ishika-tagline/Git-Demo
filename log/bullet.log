@@ -1,0 +1,20 @@
+2023-01-27 15:36:48[WARN] user: tagline
+GET /users
+USE eager loading detected
+  User => [:acc]
+  Add to your query: .includes([:acc])
+Call stack
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:9:in `map'
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:9:in `block in _app_views_users_index_html_erb__1950157469194668983_29600'
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:8:in `_app_views_users_index_html_erb__1950157469194668983_29600'
+
+2023-01-27 15:37:05[WARN] user: tagline
+GET /users
+USE eager loading detected
+  User => [:acc]
+  Add to your query: .includes([:acc])
+Call stack
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:9:in `map'
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:9:in `block in _app_views_users_index_html_erb__1950157469194668983_29600'
+  /Users/tagline/Documents/sites/rails/blog/app/views/users/index.html.erb:8:in `_app_views_users_index_html_erb__1950157469194668983_29600'
+

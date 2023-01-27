@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   #start root
-  #root to: "users#get_bio"
+  root to: "users#index"
   
   resources :properties
   

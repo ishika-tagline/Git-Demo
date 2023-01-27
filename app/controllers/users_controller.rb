@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   #skip_before_action :verify_authenticity_token
 
   def index
-   @users=User.all
+   @users=User.includes(:acc)
+   @user_list=User.all
   end
 
   def new
@@ -101,12 +102,8 @@ class UsersController < ApplicationController
   end
 
   def set_user
-
-    if(params[:id])
-    @user=User.find(params[:id])
-    else
-      @user=User.find(params[:user_id])  
-    end    
+    id = params[:id].presence || params[:user_id]
+    @user = User.find(id)  
   end
 
 end
