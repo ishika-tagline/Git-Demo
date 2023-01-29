@@ -1,17 +1,16 @@
 class User < ApplicationRecord
-
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable, :trackable 
+         :recoverable, :rememberable, :validatable,:trackable
 
     enum :user_type,[:agent,:buyer,:seller]
     has_many :acc, class_name: 'Account', dependent: :nullify
     accepts_nested_attributes_for :acc
-    validates :name, presence: true
-    before_validation :befor_validation_fun, on: :create;
+    #validates :name, presence: true
+    #before_validation :befor_validation_fun, on: :create;
     after_validation :printObj;
-    before_save :changeNameStyle ,if: :nameNotEmpty
+    #before_save :changeNameStyle ,if: :nameNotEmpty
     after_destroy CallBack.new
 
 

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   
   #start root
-  root to: "users#index"
   
   resources :properties
   
@@ -25,14 +24,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  root to: "users#index"
+
   resources :users do
     scope module: 'admin' do     #/accounts
       resources :accounts
+    end 
   end
-
-
-  
-end
 
 direct :ruby do
   "https://rubyonrails.org"
