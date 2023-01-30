@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
     
+  #before_action :authenticate_user!, only: %i[index]
   before_action :set_user, only: %i[show edit update destroy]
   #skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: [:home]
 
   def index
    @users=User.includes(:acc)
@@ -52,6 +54,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def home
+    
+  end
   def get_name
     render plain: "name: #{params[:name]} default value: #{params[:age]}"
   end
@@ -106,4 +111,16 @@ class UsersController < ApplicationController
     @user = User.find(id)  
   end
 
+  def authenticate_user!
+    if user_signed_in?
+        p "current user....#{current_user.name}"
+         #users_path 
+    else
+        redirect_to home_path
+        # respond_to do |format|
+        #     format.html {redirect_to home_path, notice: 'User was successfully destroy'}
+        # end
+    end
+
+end
 end

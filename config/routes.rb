@@ -24,7 +24,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  devise_scope :user do
+    get '/auth/facebook/callback', to: 'users/omniauth_callbacks#facebook'
+
+  end
   root to: "users#index"
+  get "/home",to:"users#home"
+
 
   resources :users do
     scope module: 'admin' do     #/accounts

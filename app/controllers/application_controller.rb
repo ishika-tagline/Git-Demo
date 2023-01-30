@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
     before_action :authenticate_user!
+    #before_action :authenticate
     before_action :configure_sign_up_params, only: [:create]
     before_action :configure_sign_in_params, only: [:create]
   
@@ -18,9 +19,11 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_out_path_for(resource)
-        new_user_session_path
+        #new_user_session_path
+        home_path
     end
 
+   
     def configure_sign_up_params
         p 'in application controller...........'
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:age,:gender])
