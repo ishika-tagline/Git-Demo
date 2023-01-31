@@ -1,8 +1,12 @@
 class User < ApplicationRecord
+rolify
+resourcify
+
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :lockable,:omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,:trackable,:confirmable
+         :recoverable, :rememberable, :validatable,
+         :trackable,:confirmable,:timeoutable
 
     enum :user_type,[:agent,:buyer,:seller]
     has_many :acc, class_name: 'Account', dependent: :nullify
@@ -13,6 +17,11 @@ class User < ApplicationRecord
     #before_save :changeNameStyle ,if: :nameNotEmpty
     after_destroy CallBack.new
 
+    after_create :assign_default_role
+
+    def assign_default_role
+      self.add_role(:newuser)
+    end
 
     def printObj
         #puts "printObj fun call"

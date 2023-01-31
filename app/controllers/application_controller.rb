@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 
-    before_action :authenticate_user!
     #before_action :authenticate
     before_action :configure_sign_up_params, only: [:create]
     before_action :configure_sign_in_params, only: [:create]
@@ -33,5 +32,6 @@ class ApplicationController < ActionController::Base
          devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
     end
     
+  
 
 end

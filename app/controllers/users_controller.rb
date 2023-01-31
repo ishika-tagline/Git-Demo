@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     
   #before_action :authenticate_user!, only: %i[index]
+  before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
   #skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [:home]
@@ -99,7 +100,7 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name,:age)
+    params.require(:user).permit(:name,:age,role_ids: [])
   end
 
   def acc_params
@@ -111,6 +112,7 @@ class UsersController < ApplicationController
     @user = User.find(id)  
   end
 
+ 
   def authenticate_user!
     if user_signed_in?
         p "current user....#{current_user.name}"
@@ -122,5 +124,5 @@ class UsersController < ApplicationController
         # end
     end
 
-end
+  end
 end
