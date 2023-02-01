@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
     
-  #before_action :authenticate_user!, only: %i[index]
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
-  #skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [:home]
-
+  
   def index
    @users=User.includes(:acc)
    @user_list=User.all
@@ -37,12 +35,14 @@ class UsersController < ApplicationController
   end
 
   def update
+     #authorize! :edit, @user
+       
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to user_url(@user), notice: 'User was successfully updated'}
         format.json {render :show,status: :updated,location: @user}
         else
-          format.html {render :edit, status: :unprocessable_entity}
+          format.html {render :edit,status: :unprocessable_entity}
           format.json {render json: @user.errors,status: :unprocessable_entity}
       end
     end
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name,:age,role_ids: [])
+    params.require(:user).permit(:email,:name,:age,:gender,role_ids: [])
   end
 
   def acc_params

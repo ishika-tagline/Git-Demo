@@ -2,7 +2,7 @@ class User < ApplicationRecord
 rolify
 resourcify
 
-  # Include default devise modules. Others available are:
+# Include default devise modules. Others available are:
   # :lockable,:omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -11,7 +11,9 @@ resourcify
     enum :user_type,[:agent,:buyer,:seller]
     has_many :acc, class_name: 'Account', dependent: :nullify
     accepts_nested_attributes_for :acc
-    #validates :name, presence: true
+    validates :email, presence: true,uniqueness: {message: "Email shoud be unique"}
+    validates :name, presence: true,uniqueness: {message: "User name shoud be unique"}
+    
     #before_validation :befor_validation_fun, on: :create;
     after_validation :printObj;
     #before_save :changeNameStyle ,if: :nameNotEmpty

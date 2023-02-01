@@ -4,7 +4,8 @@ class Admin::AccountsController < ApplicationController
     before_action :set_account,only: %i[show edit update destroy]
     
     def index
-        @accounts=@user.acc;
+        render plain: "ok"
+        #@accounts=@user.acc;
     end
 
 

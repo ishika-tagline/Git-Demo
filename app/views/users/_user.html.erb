@@ -7,6 +7,7 @@
                     name:<%=user.name%></br>
                     age: <%=user.age%></br>
                     gender: <%=user.gender%><br>
+                    email: <%=user.email%><br>
                     Role: <%= user.has_any_role? ? user.roles.pluck(:name).to_sentence : "notDefine" %>
                 </td>
             </tr>
