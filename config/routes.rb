@@ -42,6 +42,10 @@ direct :ruby do
   "https://rubyonrails.org"
 end
 
+namespace :person do
+  resources :people
+end
+
   # namespace :admin do          #/admin/accounts
   #   resources :accounts
   # end
