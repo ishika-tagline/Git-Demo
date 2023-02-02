@@ -4,10 +4,22 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    #user ||=User.new
-    can :read, User, user: user
-    cannot :update, User
+      
+    can :read, User, published: true
 
+    if user.has_role? :admin
+      p "#{user.inspect} has admin rights11"
+      can :read, Account, user: user
+      can :update, User, id: user.id
+      can :read,:index # can read users#index
+      #can :create,Account, user: user
+    else
+      p "#{user.email} has not admin rights"
+      cannot :update, User
+      cannot :read, Account
+    end
+
+    #can :manage, Category, seller: { user: user }
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

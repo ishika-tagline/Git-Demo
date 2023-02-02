@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
 
-    rescue_from CanCan::AccessDenied do |exception|
-        redirect_to home_path, :alert => exception.message
-      end
+    # rescue_from CanCan::AccessDenied do |exception|
+    #     #redirect_to root, :alert => exception.message
+    #     #render plain: exception.message
+    #   end
      
     #before_action :authenticate
     before_action :configure_sign_up_params, only: [:create]
     before_action :configure_sign_in_params, only: [:create]
-  
     #http_basic_authenticate_with name: "ishika", password: "123"
     #rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 

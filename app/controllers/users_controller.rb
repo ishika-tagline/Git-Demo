@@ -3,7 +3,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:home]
-  
+  authorize_resource
+  #load_resource
+
   def index
    @users=User.includes(:acc)
    @user_list=User.all
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    authorize! :edit, @user
+    #authorize! :edit, @user,:message => "Can not update other user detail"
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to user_url(@user), notice: 'User was successfully updated'}
@@ -55,9 +57,9 @@ class UsersController < ApplicationController
   end
 
   def home
-    
   end
-  def get_name
+  
+    def get_name
     render plain: "name: #{params[:name]} default value: #{params[:age]}"
   end
 
@@ -118,9 +120,6 @@ class UsersController < ApplicationController
          #users_path 
     else
         redirect_to home_path
-        # respond_to do |format|
-        #     format.html {redirect_to home_path, notice: 'User was successfully destroy'}
-        # end
     end
 
   end
