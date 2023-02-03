@@ -1,3 +1,3 @@
 class Section < ApplicationRecord
-    has_one :student
+  has_one :student
 end

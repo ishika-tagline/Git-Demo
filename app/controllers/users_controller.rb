@@ -1,18 +1,18 @@
 class UsersController < ApplicationController
-    
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:home]
-  authorize_resource
-  #load_resource
+  #authorize_resource
+  #skip_before_action :authorize_resource, only: [:authenticate_user!]
+  # load_resource
 
   def index
-   @users=User.includes(:acc)
-   @user_list=User.all
+    @users = User.includes(:acc)
+    @user_list = User.all
   end
 
   def new
-    @user=User.new
+    @user = User.new
   end
 
   def create
@@ -20,8 +20,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        #format.html { redirect_to users_path, notice: "User was successfully created." } //redirect to specific path
+        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
+        # format.html { redirect_to users_path, notice: "User was successfully created." } //redirect to specific path
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -30,21 +30,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    #authorize! :edit, @user,:message => "Can not update other user detail"
+     authorize! :edit, @user,:message => "Can not update other user detail"
     respond_to do |format|
       if @user.update(user_params)
-        format.html {redirect_to user_url(@user), notice: 'User was successfully updated'}
-        format.json {render :show,status: :updated,location: @user}
-        else
-          format.html {render :edit,status: :unprocessable_entity}
-          format.json {render json: @user.errors,status: :unprocessable_entity}
+        format.html { redirect_to user_url(@user), notice: 'User was successfully updated' }
+        format.json { render :show, status: :updated, location: @user }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,56 +50,53 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html {redirect_to users_url, notice: 'User was successfully destroy'}
+      format.html { redirect_to users_url, notice: 'User was successfully destroy' }
     end
   end
 
-  def home
-  end
-  
-    def get_name
+  def home; end
+
+  def get_name
     render plain: "name: #{params[:name]} default value: #{params[:age]}"
   end
 
   def get_bio
-    #render inline: "xml.p {'Horrid coding practice!'}", type: :builder
-    #render html: helpers.tag.builder('not found')
-    @user={name:'ishika',age:21}
-    #render json: @user
-    #render xml: @user
-    #render status: 500
+    # render inline: "xml.p {'Horrid coding practice!'}", type: :builder
+    # render html: helpers.tag.builder('not found')
+    @user = { name: 'ishika', age: 21 }
+    # render json: @user
+    # render xml: @user
+    # render status: 500
     p 'rails root..'
     p Rails.root
-    p params    
-    render variants: [:new,:get_bio]
-    #render body: "alert('Hello Rails');",content_type: 'application/rss'
-    #render file: "#{Rails.root}/public/404.html", layout: false
+    p params
+    render variants: %i[new get_bio]
+    # render body: "alert('Hello Rails');",content_type: 'application/rss'
+    # render file: "#{Rails.root}/public/404.html", layout: false
   end
 
   def get_resume
-    render plain: "Hello good noon...."
+    render plain: 'Hello good noon....'
   end
 
   def create_form
-    @user=User.first
+    @user = User.first
   end
 
   def get_form
-
     p "parameters are......#{params[:city]}"
-      redirect_to users_show_path 
-    #render template: 'users/show_form'
+    redirect_to users_show_path
+    # render template: 'users/show_form'
   end
 
   def update_form
-    render plain: "hii"
+    render plain: 'hii'
   end
 
-  def show_form
-  end
-  
+  def show_form; end
+
   def user_params
-    params.require(:user).permit(:email,:name,:age,:gender,role_ids: [])
+    params.require(:user).permit(:email, :name, :age, :gender,:image,role_ids: [])
   end
 
   def acc_params
@@ -110,17 +105,15 @@ class UsersController < ApplicationController
 
   def set_user
     id = params[:id].presence || params[:user_id]
-    @user = User.find(id)  
+    @user = User.find(id)
   end
 
- 
   def authenticate_user!
     if user_signed_in?
-        p "current user....#{current_user.name}"
-         #users_path 
+      p "current user....#{current_user.name}"
+    # users_path
     else
-        redirect_to home_path
+      redirect_to home_path
     end
-
   end
 end

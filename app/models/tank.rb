@@ -1,3 +1,3 @@
 class Tank < ApplicationRecord
-    has_many :fishes
+  has_many :fishes
 end

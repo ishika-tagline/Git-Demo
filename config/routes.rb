@@ -1,24 +1,23 @@
 Rails.application.routes.draw do
-  
-  #start root
-  
+  # start root
+
   resources :properties
-  
-  #(:name) is optional 
-  #get 'users/(:name)', to: 'users#get_name', defaults: {age:21} 
+
+  # (:name) is optional
+  # get 'users/(:name)', to: 'users#get_name', defaults: {age:21}
 
   get 'users/form', to: 'users#create_form'
-  post 'users/get_form',to: 'users#get_form'
+  post 'users/get_form', to: 'users#get_form'
   get 'users/show', to: 'users#show_form'
-  match 'users/bio/(:name)', to: 'users#get_bio', via: [:get],as: 'users_bio'
-  
-  #http://localhost:3000/users/bio/data/12
-  #get 'users/bio/*age',to: 'users#get_bio' 
-  
-  #get'*users/resume/(:name)', to: redirect('users/bio/%{name}')
-  get 'users/resume/(:name)', to: redirect {|path_params, req| "users/bio/#{path_params[:name]}"}
+  match 'users/bio/(:name)', to: 'users#get_bio', via: [:get], as: 'users_bio'
 
-  scope module: 'admin' do     #/accounts
+  # http://localhost:3000/users/bio/data/12
+  # get 'users/bio/*age',to: 'users#get_bio'
+
+  # get'*users/resume/(:name)', to: redirect('users/bio/%{name}')
+  get 'users/resume/(:name)', to: redirect { |path_params, _req| "users/bio/#{path_params[:name]}" }
+
+  scope module: 'admin' do # /accounts
     get 'delete/user/:user_id/account/:id', to: 'accounts#destroy', as: :account_delete
   end
 
@@ -26,25 +25,23 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/auth/facebook/callback', to: 'users/omniauth_callbacks#facebook'
-
   end
-  root to: "users#index"
-  get "/home",to:"users#home"
-
+  root to: 'users#index'
+  get '/home', to: 'users#home'
 
   resources :users do
-    scope module: 'admin' do     #/accounts
+    scope module: 'admin' do # /accounts
       resources :accounts
-    end 
+    end
   end
 
-direct :ruby do
-  "https://rubyonrails.org"
-end
+  direct :ruby do
+    'https://rubyonrails.org'
+  end
 
-namespace :person do
-  resources :people
-end
+  namespace :person do
+    resources :people
+  end
 
   # namespace :admin do          #/admin/accounts
   #   resources :accounts
@@ -68,18 +65,18 @@ end
 
   # resources :accounts, path: '/admin/accounts'
 
-  get '/users/:id', to: 'users#show', as: 'user1' #declare path
+  get '/users/:id', to: 'users#show', as: 'user1' # declare path
   get 'user', to: 'users#show'
 
   # root "articles#index"
-  #get 'users/index', to: 'users#index'
-  #get 'articles/index', to: 'articles#index'
-  #get '/articles/:id', to: 'articles#show'
+  # get 'users/index', to: 'users#index'
+  # get 'articles/index', to: 'articles#index'
+  # get '/articles/:id', to: 'articles#show'
 
- resources :articles do
-  resources :comments
- end
+  resources :articles do
+    resources :comments
+  end
 
- # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
- # Defines the root path route ("/")
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Defines the root path route ("/")
 end

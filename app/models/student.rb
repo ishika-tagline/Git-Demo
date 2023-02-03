@@ -1,5 +1,4 @@
 class Student < ApplicationRecord
-
-    has_and_belongs_to_many :courses
-    belongs_to :section
+  has_and_belongs_to_many :courses
+  belongs_to :section
 end
