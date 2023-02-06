@@ -2,13 +2,14 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:home]
+  
   #authorize_resource
   #skip_before_action :authorize_resource, only: [:authenticate_user!]
   # load_resource
 
   def index
     @users = User.includes(:acc)
-    @user_list = User.all
+    #@user_list = User.all
   end
 
   def new

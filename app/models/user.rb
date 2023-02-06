@@ -54,4 +54,11 @@ class User < ApplicationRecord
     # user=User.create(name:"ishika31".capitalize)
     # user.save
   end
+
+
+  def to_builder
+    Jbuilder.new do |user|
+      user.(self, :name, :age)
+    end
+  end
 end
