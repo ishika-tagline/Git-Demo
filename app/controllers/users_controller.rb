@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:home]
-  
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
+
   #authorize_resource
   #skip_before_action :authorize_resource, only: [:authenticate_user!]
   # load_resource
@@ -55,6 +57,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def configure_sign_up_params
+    p 'in application controller...........'
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name age gender])
+  end
+
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
+  end
   def home; end
 
   def get_name

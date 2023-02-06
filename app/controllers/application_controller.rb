@@ -5,12 +5,7 @@ class ApplicationController < ActionController::Base
   #   end
   # skip_before_action :verify_authenticity_token
   # protect_from_forgery with: :null_session
-
-
   # before_action :authenticate
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_sign_in_params, only: [:create]
-
   # http_basic_authenticate_with name: "ishika", password: "123"
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -29,12 +24,5 @@ class ApplicationController < ActionController::Base
     home_path
   end
 
-  def configure_sign_up_params
-    p 'in application controller...........'
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name age gender])
-  end
 
-  def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
-  end
 end

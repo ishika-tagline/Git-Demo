@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # start root
 
   resources :properties
-
+  
   # (:name) is optional
   # get 'users/(:name)', to: 'users#get_name', defaults: {age:21}
 
@@ -39,9 +39,7 @@ Rails.application.routes.draw do
     'https://rubyonrails.org'
   end
 
-  namespace :person do
-    resources :people
-  end
+    resources :people, module: 'person'
 
   # namespace :admin do          #/admin/accounts
   #   resources :accounts
