@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: [:home]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_sign_in_params, only: [:create]
@@ -11,6 +12,14 @@ class UsersController < ApplicationController
 
   def index
     @users = User.includes(:acc)
+    options = {}
+    options[:meta] = {total: 2}
+    options[:include] = [:acc, :'acc.user_id']
+    #hash= UserSerializer.new(@users,options).serializable_hash
+    #json_string= UserSerializer.new(@users,options).serializable_hash.to_json
+    options[:is_collection]
+  render json: UserSerializer.new(@users,{params: {current_user: current_user}}).serializable_hash
+    
     #@user_list = User.all
   end
 
@@ -20,12 +29,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    p "user data:::: #{@user.password}"
     respond_to do |format|
       if @user.save
         format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
         # format.html { redirect_to users_path, notice: "User was successfully created." } //redirect to specific path
-        format.json { render :show, status: :created, location: @user }
+        format.json { render :show, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -42,7 +51,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated' }
-        format.json { render :show, status: :updated, location: @user }
+        #format.json { render :show, status: :updated, location: @user }
+        format.json { render :show, status: :ok, location: @user }
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -122,7 +133,7 @@ class UsersController < ApplicationController
   def authenticate_user!
     if user_signed_in?
       p "current user....#{current_user.name}"
-    # users_path
+      users_path
     else
       redirect_to home_path
     end

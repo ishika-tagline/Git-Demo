@@ -3,12 +3,15 @@ class ApplicationController < ActionController::Base
   #     #redirect_to root, :alert => exception.message
   #     #render plain: exception.message
   #   end
-  # skip_before_action :verify_authenticity_token
+  
+   #skip_before_action :verify_authenticity_token
   # protect_from_forgery with: :null_session
+
   # before_action :authenticate
   # http_basic_authenticate_with name: "ishika", password: "123"
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  
   private
 
   def record_not_found
@@ -20,7 +23,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(_resource)
-    # new_user_session_path
     home_path
   end
 

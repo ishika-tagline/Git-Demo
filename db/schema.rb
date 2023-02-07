@@ -129,8 +129,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_181506) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "hoobies_people", id: false, force: :cascade do |t|
-    t.integer "hooby_id", null: false
+  create_table "hobbies_people", id: false, force: :cascade do |t|
+    t.integer "hobby_id", null: false
     t.integer "person_id", null: false
   end
 

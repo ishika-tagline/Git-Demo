@@ -8,7 +8,7 @@ class CheckValidation < ActiveModel::Validator
 end
 
 class Person < ApplicationRecord
-  has_and_belongs_to_many :hobbies,join_table: :hoobies_people
+  has_and_belongs_to_many :hobbies,join_table: :hobbies_people
 
   validates :name, :email, :phone_number, :city, :state, :country, :hobby, :gender, presence: true
   validates :email, uniqueness: true, unless: proc { |a| a.email.blank? }
