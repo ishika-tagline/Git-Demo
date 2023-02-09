@@ -39,6 +39,9 @@ class Api::V1::AccountsController < Api::V1::BaseController
         success_json(hash)
     end
 
+    def destroy
+
+    end
     private
 
     def account_params
