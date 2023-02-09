@@ -1,7 +1,7 @@
 class Api::V1::AccountsController < Api::V1::BaseController
     skip_before_action :verify_authenticity_token
 
-    before_action :get_user, only: %i[index create]
+    before_action :get_user_or_account, only: %i[index create destroy   ]
 
     def index
         if @user.present?
@@ -23,9 +23,13 @@ class Api::V1::AccountsController < Api::V1::BaseController
             if params[:account].present?
                 params[:account].each do |account|
                     acc= @user.acc.create(name: account[:name])
-                    if acc
+                    p "count::::::::::::1"
+                    if acc.invalid?
+                        p "In unless part call:::::::::::"
+                        error_json([],"Something went wrong",acc.errors.full_messages)
+                        return
+                    end 
                     account_list.append(acc)
-                    end
                 end
             else
                 error_json([],"Please provid account detail",[])
@@ -40,15 +44,21 @@ class Api::V1::AccountsController < Api::V1::BaseController
     end
 
     def destroy
-
-    end
+        return error_json([],"User id required",[]) if @user.nil?  
+        return error_json([],"Account is required",[]) if @account.nil?
+        return error_json([],"Requested account not belong to you",[]) if !@user.acc.include?(@account)
+        @account.destroy
+        success_json({})
+    end 
+    
     private
 
     def account_params
         params.require(:account).permit(:name)
     end
 
-    def get_user
+    def get_user_or_account
+        @account=Account.find_by(id:params[:id].presence)
         @user = User.find_by(id:params[:user_id])
     end
 end
