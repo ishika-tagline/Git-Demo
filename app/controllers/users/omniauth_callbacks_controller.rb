@@ -13,14 +13,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     info = request.env['omniauth.auth']['info']
     name = info[:name]
     email = info[:email]
-    auth_data = request.env['omniauth.auth']['provider'] # facebook
+    auth_data = request.env['omniauth.auth']['provider']
     @user = User.where(name:).or(User.where(email:))
     if @user.nil?
-      p 'User is null ............................'
-      p "data.............#{name + ' ' + email + ' auth data:: ' + auth_data}"
       User.create(name:, email:, password: '123456')
     end
-    p "user data..........#{@user.first.email}"
     sign_in @user.first
     redirect_to users_path
   end

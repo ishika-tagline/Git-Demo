@@ -5,10 +5,8 @@
  <% if user_signed_in? %>
     <%=link_to "Show users", users_path  %>
 <% else %>
-    <%=link_to "Sign In with email", new_user_session_path %> 
+    <%= link_to "Sign In with email", new_user_session_path %> 
     <br>
     <p>OR</p>
-    
-    <%=button_to "Login with FaceBook","/auth/facebook",method: :POST ,data: {turbo: false}%>
-
+    <%= button_to "Login with FaceBook","/auth/facebook",method: :POST ,data: {turbo: false} %>
 <% end %>

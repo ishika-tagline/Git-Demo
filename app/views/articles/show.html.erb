@@ -5,8 +5,8 @@
     <h1><%= @article.title %></h1>
     <h2><%= @article.body %></h2>
     <%= @article.comments.each do |comment| %>
-    <h3><%=comment.commenter%></h3>
-    <h4><%=comment.body%></h4>
+    <h3><%= comment.commenter %></h3>
+    <h4><%= comment.body %></h4>
     <% end %>
 </div>
 
@@ -26,7 +26,7 @@
         </p>
 
         <p>
-            <%= form.submit%>
+            <%= form.submit %>
         </p>
     <%end%>
 </div>

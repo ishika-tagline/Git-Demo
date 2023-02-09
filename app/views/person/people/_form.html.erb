@@ -1,56 +1,47 @@
 <%= form_with(model: person) do |form| %>
 
 <div>
-    <%=form.label :name%>
-    <%=form.text_field :name%>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
 </div><br>
 
 <div>
-    <%=form.label :email%>
-    <%=form.text_field :email%>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
 </div><br>
 
 <div>
-    <%=form.label :phone_number%>
-    <%=form.text_field :phone_number%>
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number %>
 </div><br>
 
 <div>
-    <%=form.radio_button :gender,"male"%>
-    <%=form.label :gender_male,"male"%>
-    <%=form.radio_button :gender,"female"%>
-    <%=form.label :gender_female, "female"%>
+    <%= form.radio_button :gender,"male" %>
+    <%= form.label :gender_male,"male" %>
+    <%= form.radio_button :gender,"female" %>
+    <%= form.label :gender_female, "female" %>
 </div><br>
 
 <div>
-
-
-    <%=label_tag "hobby_reading","Reading"%>
-    <%=check_box_tag 'person[hobby][]',id:'hobby_reading' %>
-
-    <%#=form.check_box :reading %>
-    <%#=form.label :reading,"Reding"%>
-    <%#=form.check_box :travelling %>
-    <%#=form.label :travelling, "travelling"%>
-    <%#=form.check_box :gaming %>
-    <%#=form.label :gaming,"gaming"%>
+    <%= label_tag "hobby_reading","Reading" %>
+    <%= check_box_tag 'person[hobby][]',id:'hobby_reading' %>
 </div><br>
 
 <div>
-    <%=form.label :city,"select city"%>
-    <%=form.select :city,[["Surat",1],["Vadodara",2],["Ahmdabad",3],["select city","", {hidden: true}]]%>
+    <%= form.label :city,"select city" %>
+    <%= form.select :city,[["Surat",1],["Vadodara",2],["Ahmdabad",3],["select city","", {hidden: true}]] %>
 </div><br>
 
 <div>
-    <%=form.label :state,"select state"%>
-    <%=form.select :state,[["Gujarat",1],["Maharashtra",2],["Up",3],["select state","", {hidden: true}]]%>
+    <%= form.label :state,"select state" %>
+    <%= form.select :state,[["Gujarat",1],["Maharashtra",2],["Up",3],["select state","", {hidden: true}]] %>
 </div><br>
 
 <div>
-    <%=form.label :state,"select country"%>
-    <%=form.select :state,[["India",1],["China",2],["Canada",3],["select country","", {hidden: true}]]%>
+    <%= form.label :state,"select country" %>
+    <%= form.select :state,[["India",1],["China",2],["Canada",3],["select country","", {hidden: true}]] %>
 </div><br>
 
-<%=form.submit%>
+<%= form.submit %>
 
 <%end%>

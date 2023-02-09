@@ -5,11 +5,11 @@ class Person::PeopleController < ApplicationController
   end
 
   def new
-    @person=Person.new
+    @person = Person.new
   end
 
   def create
-    @person=Person.new(person_params)
+    @person = Person.new(person_params)
     respond_to do |format|
       if @person.save
         format.html {redirect_to person_url(@person),notice: "Data save succsesfully"}
@@ -18,6 +18,7 @@ class Person::PeopleController < ApplicationController
       end
     end
   end
+  
   private 
 
   def person_params

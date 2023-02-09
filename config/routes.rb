@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   root to: 'users#index'
   get '/home', to: 'users#home'
 
+  namespace :api do
+    namespace :v1 do
+      resources :users 
+    end
+  end
+
   resources :users do
     scope module: 'admin' do # /accounts
       resources :accounts
@@ -41,6 +47,7 @@ Rails.application.routes.draw do
 
     resources :people, module: 'person'
 
+    
   # namespace :admin do          #/admin/accounts
   #   resources :accounts
   # end

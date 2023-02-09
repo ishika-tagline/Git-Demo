@@ -1,12 +1,12 @@
 
-<%if !@accounts.blank?%>
+<%if !@accounts.blank? %>
 
     <h1>Accounts of <%= @accounts.first.user.name %></h1>
-        <%@accounts.each do|account|%>
-            <%@account=account;%>
-            <p>Bank name:<%= account.name%></p> <%=link_to "show account",user_account_path(@user,@account)%>
+        <% @accounts.each do |account| %>
+            <% @account=account; %>
+            <p>Bank name:<%= account.name%></p> <%= link_to "show account",user_account_path(@user,@account) %>
         <%end%>
 
 <% else %>
-    <h1>Account not found for  <%=@user.name%></h1>
+    <h1>Account not found for  <%= @user.name %></h1>
 <%end%>

@@ -5,7 +5,6 @@ class Admin::AccountsController < ApplicationController
   # authorize_resource
 
   def index
-    # render plain: "ok"
     @accounts = @user.acc
     authorize! :index, @accounts.first, message: "Can not show other user's accounts"
   end
@@ -38,16 +37,10 @@ class Admin::AccountsController < ApplicationController
   end
 
   def set_user
-    p 'set user call...............'
     @user = User.find(params[:user_id])
   end
 
   def set_account
-    p 'set account call...............'
     @account = Account.find(params[:id])
-
-    # if(params[:user_id])
-    #     @user=User.find(params[:user_id])
-    # end
   end
 end

@@ -8,19 +8,20 @@ class UsersController < ApplicationController
 
   #authorize_resource
   #skip_before_action :authorize_resource, only: [:authenticate_user!]
-  # load_resource
+  #load_resource
 
   def index
     @users = User.includes(:acc)
-    options = {}
-    options[:meta] = {total: 2}
-    options[:include] = [:acc, :'acc.user_id']
-    #hash= UserSerializer.new(@users,options).serializable_hash
+    #options = {}
+    #options[:meta] = {total: 2}
+    #options[:include] = [:acc, :'acc.user_id']
+    #hash = UserSerializer.new(@users,options).serializable_hash
     #json_string= UserSerializer.new(@users,options).serializable_hash.to_json
-    options[:is_collection]
-  render json: UserSerializer.new(@users,{params: {current_user: current_user}}).serializable_hash
-    
-    #@user_list = User.all
+    #options[:is_collection]
+    #render json: UserSerializer.new(@users,{params: {current_user: current_user}}).serializable_hash
+    #res={message: "data get successfully", status: 200}
+    #hash.merge!(res)
+    #render json: hash
   end
 
   def new
@@ -47,9 +48,10 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-     authorize! :edit, @user,:message => "Can not update other user detail"
+    authorize! :edit, @user,:message => "Can not update other user detail"
     respond_to do |format|
-      if @user.update(user_params)
+       if UpdateUser.new(@user,user_params).update_user 
+      #if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated' }
         #format.json { render :show, status: :updated, location: @user }
         format.json { render :show, status: :ok, location: @user }
@@ -69,13 +71,13 @@ class UsersController < ApplicationController
   end
 
   def configure_sign_up_params
-    p 'in application controller...........'
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name age gender])
   end
 
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
+
   def home; end
 
   def get_name

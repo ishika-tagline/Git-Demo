@@ -1,14 +1,14 @@
 <h1>show User</h1>
-<%=render @user%>
+<%= render @user%>
 
 <div>
 <div>
         <h3>Accounts</h3>
 
-        <%=@user.acc.map(&:name)%>
+        <%= @user.acc.map(&:name) %>
     <div>
         <br>
-        <%=link_to 'Edit this User',edit_user_path(@user)%> |
-        <%=link_to 'Back to users',users_path %>
-        </br></br><%=button_to 'delete user',@user,method: :delete%>
+        <%= link_to 'Edit this User',edit_user_path(@user) %> |
+        <%= link_to 'Back to users',users_path %>
+        </br></br><%= button_to 'delete user',@user,method: :delete %>
 </div>

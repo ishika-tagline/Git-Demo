@@ -4,13 +4,13 @@
         <table>
             <tr>
                 <td>
-                    name:<%= user.name%></br>
-                    age: <%= user.age%></br>
-                    gender: <%= user.gender%><br>
-                    email: <%= user.email%><br>
+                    name:<%= user.name %></br>
+                    age: <%= user.age %></br>
+                    gender: <%= user.gender %><br>
+                    email: <%= user.email %><br>
                     Role: <%= user.has_any_role? ? user.roles.pluck(:name).to_sentence : "notDefine" %><br><br>
-                    <%if user.image.attached?%>
-                        <%=image_tag  user.image %><br> <!-- show simple image-->
+                    <% if user.image.attached? %>
+                        <%= image_tag  user.image %><br> <!-- show simple image-->
                         <%#=image_tag  url_for (user.image) %> <!-- src change with sign_id-->
                         <%#=link_to "link here", rails_blob_path(user.image,disposition: "attachment") %> <!-- display link-->
                         <%#=image_tag user.image.representation(resize_to_limit: [100,100]).processed.url %> <!--need to add image_processing gem-->
