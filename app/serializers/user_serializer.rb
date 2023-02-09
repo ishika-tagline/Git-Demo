@@ -6,10 +6,8 @@ class UserSerializer
   #set_type :user  # optional default added
 
   attributes :name, :email, :age
-
-  attribute :account_list,:new_name do |user|
+  attribute :account_list do |user|
     user.acc
-    user.name
   end
   
   # #add custom field

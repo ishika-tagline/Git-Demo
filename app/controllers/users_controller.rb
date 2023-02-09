@@ -12,16 +12,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.includes(:acc)
-    #options = {}
-    #options[:meta] = {total: 2}
-    #options[:include] = [:acc, :'acc.user_id']
-    #hash = UserSerializer.new(@users,options).serializable_hash
-    #json_string= UserSerializer.new(@users,options).serializable_hash.to_json
-    #options[:is_collection]
-    #render json: UserSerializer.new(@users,{params: {current_user: current_user}}).serializable_hash
-    #res={message: "data get successfully", status: 200}
-    #hash.merge!(res)
-    #render json: hash
   end
 
   def new

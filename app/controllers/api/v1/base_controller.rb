@@ -5,7 +5,7 @@ class Api::V1::BaseController < ApplicationController
         render json: data.merge!(message_status) 
     end
 
-    def error()
-        render json: {data:data,message:message,status:200,error:[]} 
+    def error_json(data,message,error)
+        render json: {data:data,message:message,status:503,error:error} 
     end
 end

@@ -1,4 +1,4 @@
 class AccSerializer
   include JSONAPI::Serializer
-  attribute :name
+  attributes :name,:user_id
 end
