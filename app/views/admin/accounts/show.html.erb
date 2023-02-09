@@ -1,5 +1,5 @@
 <h1>Account</h1>
 
-bank name:<%=@account.name%>
+bank name:<%= @account.name %>
 
-<%=link_to 'edit this Account',edit_user_account_path(@user,@account)%> | <%=link_to 'delete account',account_delete_url(@user,@account)%>
+<%= link_to 'edit this Account',edit_user_account_path(@user,@account) %> | <%= link_to 'delete account',account_delete_url(@user,@account) %>

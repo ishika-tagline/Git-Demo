@@ -3,8 +3,8 @@
 
 <%if user.errors.any?%>
     <div style="color: red">
-        <%user.errors.each do |error|%>
-        <p><%=error.full_message%><p>
+        <% user.errors.each do |error| %>
+        <p><%= error.full_message %><p>
         <%end%>
     </div>
 <%end%>
@@ -12,22 +12,22 @@
     <%= yield form %>
 
 <div>
-    <%=form.label :name %><br>
-    <%=form.text_field :name %>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
 </div>
 
     <br>
 
 <div>
-    <%=form.label :email %><br>
-    <%=form.text_field :email %>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
 </div>
 
     <br>
 
 <div>
-    <%=form.label :age %><br>
-    <%=form.text_field :age %>
+    <%= form.label :age %><br>
+    <%= form.text_field :age %>
 </div>
 
     <br>
@@ -35,22 +35,22 @@
 <div>
     <%= form.radio_button :gender ,"male"%>
     <%= form.label :gender_male, "male"%>
-    <%=form.radio_button :gender,"female"%>
-    <%=form.label :gender_female, "female"%>
+    <%= form.radio_button :gender,"female"%>
+    <%= form.label :gender_female, "female"%>
   </div>
 
     <br>
 
 <div>
-    <%=form.label :role %>
-    <%=form.collection_check_boxes :role_ids,Role.all,:id,:name %>
+    <%= form.label :role %>
+    <%= form.collection_check_boxes :role_ids,Role.all,:id,:name %>
 </div>
 
     <br>
 
 <div>
-    <%=form.label :image %>
-    <%=form.file_field :image %>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
 </div>
 
     <br>
