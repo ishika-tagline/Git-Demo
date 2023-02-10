@@ -11,7 +11,21 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :acc
   validates :email, presence: true, uniqueness: { message: 'Email shoud be unique' }
   validates :name, presence: true, uniqueness: { message: 'User name shoud be unique' }
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit:[500,500]
+  end
+  validate :image_validation
+
+  def image_validation
+    return unless image.attached?
+    if image.blob.byte_size >= 1.megabyte
+      errors.add(:user_image, " is to big")
+    end
+    image_type=["image/jpeg", "image/png"]
+    unless image_type.include?(image.content_type)
+      errors.add(:user_image, "Must be a JPEG or PNG")
+    end
+  end
 
   # before_validation :befor_validation_fun, on: :create;
   after_validation :printObj

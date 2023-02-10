@@ -1,7 +1,6 @@
 class Account < ApplicationRecord
   resourcify
   validates :name, presence: true
-
   belongs_to :user, counter_cache: true  # count account using size, default generate accounts_count col in users tble
   # default_scope{where("name=?",'BOB')}
   scope :get_only_bob_bank, -> { where(name: 'BOB') }
