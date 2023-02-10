@@ -29,7 +29,6 @@ class Api::V1::AccountsController < Api::V1::BaseController
                         return
                     end 
                     account_list.append(acc)
-                    end
                 end
         
         hash=AccSerializer.new(account_list).serializable_hash
