@@ -22,17 +22,16 @@ class Api::V1::AccountsController < Api::V1::BaseController
         return error_json([], "User not found",[]) if !@user.present?  
         return error_json([], "Please provid account detail", []) if !params[:account].present?
 
-                params[:account].each do |account|
-                    acc= @user.acc.create(name: account[:name])
-                    if acc.invalid?
-                        error_json([], "Something went wrong", acc.errors.full_messages)
-                        return
-                    end 
-                    account_list.append(acc)
-                end
+             p "account_params:::#{account_params}"
+             acc = @user.acc.create(account_params)
+             if acc.invalid?
+                 error_json([], "Something went wrong", acc.errors.full_messages)
+                 return
+            end 
+             account_list.append(acc)
         
-        hash=AccSerializer.new(account_list).serializable_hash
-        success_json(hash)
+         hash=AccSerializer.new(account_list).serializable_hash
+         success_json(hash)
     end
 
     def destroy
