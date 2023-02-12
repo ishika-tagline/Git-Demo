@@ -1,4 +1,15 @@
+<%= javascript_import_module_tag "custom" %>
+
+
 <%= form_with(model: person) do |form| %>
+
+<%if person.errors.any?%>
+    <div style="color: red">
+        <%person.errors.each do |error|%>
+        <p><%=error.full_message%><p>
+        <%end%>
+    </div>
+<%end%>
 
 <div>
     <%= form.label :name %>
@@ -23,25 +34,73 @@
 </div><br>
 
 <div>
-    <%= label_tag "hobby_reading","Reading" %>
-    <%= check_box_tag 'person[hobby][]',id:'hobby_reading' %>
+
+  <%= form.label "Hobby" %><br />
+  <%= form.collection_check_boxes :hobby_ids, Hobby.all, :id, :name do |b| %>
+      <%= b.check_box %>
+      <%= b.label %>
+
+  <%end%>
+
 </div><br>
 
 <div>
     <%= form.label :city,"select city" %>
-    <%= form.select :city,[["Surat",1],["Vadodara",2],["Ahmdabad",3],["select city","", {hidden: true}]] %>
+    <%#= form.select :city,[["Surat",1],["Vadodara",2],["Ahmdabad",3],["select city","", {hidden: true}]] %>        
+    <%= form.select :city,@cities.map { |c| [c.name, c.id] } %>
+
 </div><br>
 
 <div>
     <%= form.label :state,"select state" %>
-    <%= form.select :state,[["Gujarat",1],["Maharashtra",2],["Up",3],["select state","", {hidden: true}]] %>
+    <%#= form.select :state,[["Gujarat",1],["Maharashtra",2],["Up",3],["select state","", {hidden: true}]] %>
+    <%= form.select :state,@states.map { |s| [s.name, s.id] } %>
+
 </div><br>
 
 <div>
-    <%= form.label :state,"select country" %>
-    <%= form.select :state,[["India",1],["China",2],["Canada",3],["select country","", {hidden: true}]] %>
+    <%=form.label :country,"select country"%>
+    <%=form.select :country,[["India",1],["China",2],["Canada",3],["select country","", {hidden: true}]]%>
 </div><br>
 
 <%= form.submit %>
 
 <%end%>
+
+<br><br>
+
+<table border= "1px solid black";>
+    <tbody>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>phone number</th>
+            <th>gender</th>
+            <th>hobby</th>
+            <th>city</th>
+            <th>state</th>
+            <th>Country</th>
+            <th>Edit</th>
+            <th>delete</th>
+
+        </tr>
+
+        <%if !@people.empty? %>
+            <%@people.each do |person|%>
+                <tr>
+                    <td><%=person.name%></td>
+                    <td><%=person.email%></td>
+                    <td><%=person.phone_number%></td>
+                    <td><%=person.gender%></td>
+                    <td><%=person.hobbies.pluck(:name).to_sentence%></td>
+                    <td><%=person.city%></td>
+                    <td><%=person.state%></td>
+                    <td><%=person.country%></td>
+                    <td><%=button_to "edit"%></td>
+                    <td><%=button_to "delete"%></td>
+                </tr>
+            <%end%>
+        <%end%>
+        
+    </tbody>
+</table>

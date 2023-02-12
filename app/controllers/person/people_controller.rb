@@ -1,5 +1,6 @@
 class Person::PeopleController < ApplicationController
 
+  before_action :get_people
   def index
      render plain: "ok"
   end
@@ -12,8 +13,9 @@ class Person::PeopleController < ApplicationController
     @person = Person.new(person_params)
     respond_to do |format|
       if @person.save
-        format.html {redirect_to person_url(@person),notice: "Data save succsesfully"}
+        format.html {redirect_to new_person_path,notice: "Data save succsesfully"}
       else 
+        p ':::::: in create else part'
         format.html{render :new, status: :unprocessable_entity}
       end
     end
@@ -22,6 +24,12 @@ class Person::PeopleController < ApplicationController
   private 
 
   def person_params
-    params.require(:person).permit(:name,:email,:phone_number,:gender,:city,:state,:country,:hobby)
+    params.require(:person).permit(:name,:email,:phone_number,:gender,:city,:state,:country,hobby_ids:[])
+  end
+
+  def get_people
+    @people=Person.all
+    @states=State.all
+    @cities=City.all
   end
 end

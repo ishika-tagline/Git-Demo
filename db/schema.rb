@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_181506) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_11_165240) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "type"
@@ -78,6 +78,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_181506) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_isbn"], name: "index_chapters_on_book_isbn"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.integer "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -201,6 +209,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_181506) do
     t.integer "position"
     t.boolean "visible", default: false
     t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

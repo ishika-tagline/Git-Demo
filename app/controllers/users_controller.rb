@@ -102,7 +102,7 @@ class UsersController < ApplicationController
     @user = User.find(id)
   end
 
-  def authe nticate_user!
+  def authenticate_user!
     if user_signed_in?
       users_path
     else
