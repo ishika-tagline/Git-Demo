@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+        include DeviseTokenAuth::Concerns::SetUserByToken
   
   def after_sign_in_path_for(_resource)
     root_path
