@@ -15,20 +15,20 @@ DeviseTokenAuth.setup do |config|
   # your test suite dramatically. The possible cost value is within range from 4
   # to 31. It is recommended to not use a value more than 10 in other environments.
   config.token_cost = Rails.env.test? ? 4 : 10
-
+  config.default_confirm_success_url = 'http://localhost:3000'
   # Sets the max number of concurrent devices per user, which is 10 by default.
   # After this limit is reached, the oldest tokens will be removed.
   # config.max_number_of_devices = 10
 
-  # Sometimes it's necessary to make several requests to the API at the same
+  # Sometimes it is necessary to make several requests to the API at the same
   # time. In this case, each request in the batch will need to share the same
   # auth token. This setting determines how far apart the requests can be while
   # still using the same auth token.
   # config.batch_request_buffer_throttle = 5.seconds
 
   # This route will be the prefix for all oauth2 redirect callbacks. For
-  # example, using the default '/omniauth', the github oauth2 provider will
-  # redirect successful authentications to '/omniauth/github/callback'
+  # example, using the default  ' /omniauth  ', the github oauth2 provider will
+  # redirect successful authentications to ' /omniauth/github/callback '
   # config.omniauth_prefix = "/omniauth"
 
   # By default sending current password is not needed for the password update.
@@ -59,5 +59,5 @@ DeviseTokenAuth.setup do |config|
   # By default DeviseTokenAuth will not send confirmation email, even when including
   # devise confirmable module. If you want to use devise confirmable module and
   # send email, set it to true. (This is a setting for compatibility)
-  # config.send_confirmation_email = true
+   config.send_confirmation_email = true
 end

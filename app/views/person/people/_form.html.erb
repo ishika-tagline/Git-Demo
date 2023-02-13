@@ -31,28 +31,22 @@
 </div><br>
 
 <div>
-
   <%= form.label "Hobby" %><br />
   <%= form.collection_check_boxes :hobby_ids, Hobby.all, :id, :name do |b| %>
       <%= b.check_box %>
       <%= b.label %>
-
   <%end%>
 
 </div><br>
 
 <div>
-    <%= form.label :city,"select city" %>
-    <%#= form.select :city,[["Surat",1],["Vadodara",2],["Ahmdabad",3],["select city","", {hidden: true}]] %>        
-    <%= form.select :city,@cities.map { |c| [c.name, c.id] } %>
-
-</div><br>
-
-<div>
     <%= form.label :state,"select state" %>
-    <%#= form.select :state,[["Gujarat",1],["Maharashtra",2],["Up",3],["select state","", {hidden: true}]] %>
     <%= form.select :state,@states.map { |s| [s.name, s.id] } %>
 
+</div><br>
+<div>
+    <%= form.label :city,"select city" %>
+    <%= form.select :city,@cities.map { |c| [c.name, c.id] } %>
 </div><br>
 
 <div>
@@ -79,7 +73,6 @@
             <th>Country</th>
             <th>Edit</th>
             <th>delete</th>
-
         </tr>
 
         <%if !@people.empty? %>

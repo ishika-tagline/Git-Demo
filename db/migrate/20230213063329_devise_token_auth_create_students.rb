@@ -1,7 +1,7 @@
-class DeviseTokenAuthCreatestudents < ActiveRecord::Migration[7.0]
+class DeviseTokenAuthCreateStudents < ActiveRecord::Migration[7.0]
   def change
     
-    create_table(:students) do |t|
+    change_table(:students) do |t|
       ## Required
       t.string :provider, :null => false, :default => "email"
       t.string :uid, :null => false, :default => ""
@@ -23,13 +23,19 @@ class DeviseTokenAuthCreatestudents < ActiveRecord::Migration[7.0]
       t.datetime :confirmation_sent_at
       t.string   :unconfirmed_email # Only if using reconfirmable
 
+      ## Trackable
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.integer     :current_sign_in_ip
+      t.integer     :last_sign_in_ip
       ## Lockable
       # t.integer  :failed_attempts, :default => 0, :null => false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
       ## User Info
-      t.string :name
+      #t.string :name
       t.string :nickname
       t.string :image
       t.string :email
@@ -37,11 +43,11 @@ class DeviseTokenAuthCreatestudents < ActiveRecord::Migration[7.0]
       ## Tokens
       t.text :tokens
 
-      t.timestamps
+      #t.timestamps
     end
 
-    add_index :students, :email,                unique: true
-    add_index :students, [:uid, :provider],     unique: true
+    #add_index :students, :email,                unique: true
+    #add_index :students, [:uid, :provider],     unique: true
     add_index :students, :reset_password_token, unique: true
     add_index :students, :confirmation_token,   unique: true
     # add_index :students, :unlock_token,         unique: true

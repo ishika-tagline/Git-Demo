@@ -1,5 +1,7 @@
 class Person::PeopleController < ApplicationController
 
+  skip_before_action :configure_permitted_parameters
+  
   before_action :get_people
   def index
      render plain: "ok"

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_sign_in_params, only: [:create]
+  skip_before_action :configure_permitted_parameters
 
   def index
     @users = User.includes(:acc)
