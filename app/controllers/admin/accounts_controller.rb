@@ -1,8 +1,6 @@
 class Admin::AccountsController < ApplicationController
-  # load_and_authorize_resource
   before_action :set_user, only: %i[index show edit update destroy]
   before_action :set_account, only: %i[show edit update destroy]
-  # authorize_resource
 
   def index
     @accounts = @user.acc
@@ -12,7 +10,6 @@ class Admin::AccountsController < ApplicationController
   def new; end
 
   def show
-    # authorize! :show,@account,:message => "Can not show other user's accounts"
   end
 
   def edit; end

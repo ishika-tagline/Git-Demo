@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # start root
+  mount_devise_token_auth_for 'Student', at: 'auth'
 
+  root to: 'users#index'
   resources :properties
   
   # (:name) is optional
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/auth/facebook/callback', to: 'users/omniauth_callbacks#facebook'
   end
-  root to: 'users#index'
   get '/home', to: 'users#home'
 
   namespace :api do

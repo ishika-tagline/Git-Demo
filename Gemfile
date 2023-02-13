@@ -79,4 +79,5 @@ gem 'omniauth-rails_csrf_protection'
 gem 'rolify'
 gem 'jsonapi-serializer'
 gem "image_processing", ">= 1.2"
+gem 'devise_token_auth'
 
