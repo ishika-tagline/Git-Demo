@@ -288,6 +288,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   bullet
   cancancan
@@ -299,6 +300,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsonapi-serializer
+  jwt
   omniauth-facebook
   omniauth-rails_csrf_protection
   puma (~> 5.0)

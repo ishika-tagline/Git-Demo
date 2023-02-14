@@ -17,12 +17,15 @@ class Person::PeopleController < ApplicationController
       if @person.save
         format.html {redirect_to new_person_path,notice: "Data save succsesfully"}
       else 
-        p ':::::: in create else part'
         format.html{render :new, status: :unprocessable_entity}
       end
     end
   end
   
+  def get_cities_by_state
+      @cities=City.where(state_id:params[:state_id].presence)
+      render json: @cities
+  end
   private 
 
   def person_params
