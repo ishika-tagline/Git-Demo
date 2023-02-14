@@ -83,10 +83,10 @@
                     <td><%=person.phone_number%></td>
                     <td><%=person.gender%></td>
                     <td><%=person.hobbies.pluck(:name).to_sentence%></td>
-                    <td><%=person.city%></td>
-                    <td><%=person.state%></td>
-                    <td><%=person.country%></td>
-                    <td><%=button_to "edit"%></td>
+                    <td><%=City.find_by(id:person.city).name if person.city !=nil  %></td>
+                    <td><%=State.find(person.state).name if person.state != nil %></td>
+                    <td><%=person.country %></td>
+                    <td><%=link_to "edit", edit_person_url(person)%></td>
                     <td><%=button_to "delete"%></td>
                 </tr>
             <%end%>

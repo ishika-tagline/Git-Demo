@@ -1,11 +1,8 @@
 class Person::PeopleController < ApplicationController
 
   skip_before_action :configure_permitted_parameters
-  
-  before_action :get_people
-  def index
-     render plain: "ok"
-  end
+    before_action :get_people
+    before_action :get_person, only: %i[edit]
 
   def new
     @person = Person.new
@@ -22,6 +19,9 @@ class Person::PeopleController < ApplicationController
     end
   end
   
+  def edit
+  end
+
   def get_cities_by_state
       @cities=City.where(state_id:params[:state_id].presence)
       render json: @cities
@@ -30,6 +30,10 @@ class Person::PeopleController < ApplicationController
 
   def person_params
     params.require(:person).permit(:name,:email,:phone_number,:gender,:city,:state,:country,hobby_ids:[])
+  end
+
+  def get_person
+    @person=Person.find_by(id:params[:id].presence)
   end
 
   def get_people
