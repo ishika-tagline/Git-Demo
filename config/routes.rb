@@ -29,8 +29,12 @@ Rails.application.routes.draw do
   end
   get '/home', to: 'users#home'
 
+  resources :employees
+  
   namespace :api do
     namespace :v1 do
+      resources :employees
+      post '/login',to: "employees#login"
       resources :users do
         resources :accounts
       end
@@ -48,6 +52,7 @@ Rails.application.routes.draw do
   end
 
     resources :people, module: 'person'
+    get '/people/state/:state_id', to: 'person/people#get_cities_by_state'
 
     
   # namespace :admin do          #/admin/accounts

@@ -41,7 +41,7 @@
 
 <div>
     <%= form.label :state,"select state" %>
-    <%= form.select :state,@states.map { |s| [s.name, s.id] } %>
+    <%= form.select :state,@states.map { |s| [s.name, s.id] },{prompt: "Select"}%>
 
 </div><br>
 <div>
