@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   end
   get '/home', to: 'users#home'
 
+  resources :employees
+  
   namespace :api do
     namespace :v1 do
       resources :employees

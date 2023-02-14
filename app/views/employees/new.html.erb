@@ -1,0 +1,24 @@
+<h1>New#Employee Controller</h1>
+
+<%= form_with(model: @employee) do |form| %>
+    <div>
+        <%=form.label :name %>
+        <%=form.text_field :name %>
+    </div>
+
+    <br/>
+
+    <h2>Add iamges</h2>
+    <div>
+        <%= form.fields_for :@pictures do |pic_form| %>
+        <%= render "picture_fields",:f => pic_form %>
+        <%end%>
+    </div>
+
+    <br>
+
+    <div>
+        <%=link_to_add_association "Add Picures", form, :pictures %>
+    <div>
+
+<% end %>

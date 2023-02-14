@@ -82,4 +82,4 @@ gem "image_processing", ">= 1.2"
 gem 'devise_token_auth'
 gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'cocoon'
